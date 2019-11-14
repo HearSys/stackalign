@@ -11,7 +11,8 @@ import scipy as sp
 from xml.dom import minidom
 import svg.path  # you might need to `pip install svg.path`
 import tqdm
-from tqdm import tnrange, tqdm_notebook
+from tqdm.notebook import tqdm
+from tqdm import tnrange
 import contextlib
 from pathlib import Path
 from matplotlib import pyplot as plt
@@ -155,7 +156,7 @@ def build_stack(images, target, rough_search_strategy=None, fine_search_strategy
     with std_out_err_redirect_tqdm() as orig_stdout:
         # tqdm needs the original stdout
         # and dynamic_ncols=True to autodetect console width
-        for im_nr, image_file in tqdm_notebook(enumerate(imagelist), desc='overall', file=orig_stdout, dynamic_ncols=True):
+        for im_nr, image_file in tqdm(enumerate(imagelist), desc='overall', file=orig_stdout, dynamic_ncols=True):
             out_file_name = write_files / f"{image_file.stem}.png"
             out_plotfile_name = write_files / f"Plot_{image_file.stem}.png"
             out_logfile = write_files / f"{image_file.stem }.log"
@@ -258,7 +259,7 @@ def align_image_brute_force(image, target, search_strategy, plot=False, write_fi
                                        roi_center_rc=best_coord,
                                        roi_size_hw=search_phase["roi_hw"],
                                        plot=plot,
-                                       progress=tqdm_notebook)
+                                       progress=tqdm)
 
         # TODO: Check if this can be done more efficiently
         # image_rescaled = transform.rescale(image,search_phase["rescale"])
