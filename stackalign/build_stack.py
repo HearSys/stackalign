@@ -33,7 +33,7 @@ class DummyTqdmFile(object):
     def write(self, x):
         # Avoid print() second call (useless \n)
         if len(x.rstrip()) > 0:
-            tqdm.tqdm.write(x, file=self.file)
+            tqdm.write(x, file=self.file)
 
     def flush(self):
         return getattr(self.file, "flush", lambda: None)()
