@@ -34,6 +34,7 @@ from matplotlib import pyplot as plt
 import logging
 from xml.dom import minidom
 import svg.path  # you might need to `pip install svg.path`
+from PIL import Image
 
 # %%
 from skimage import img_as_float, io
