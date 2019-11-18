@@ -10,6 +10,7 @@ import scipy as sp
 # Parsing svg files and accessing paths in there
 from xml.dom import minidom
 import svg.path  # you might need to `pip install svg.path`
+from PIL import Image
 import tqdm
 from tqdm.notebook import tqdm
 from tqdm import tnrange
@@ -105,7 +106,7 @@ def plot_overlay(image, svg_path_or_image, figsize=(15,15), overlay_color='magen
     #Show transformed image
     ax.imshow(image, interpolation='nearest')
     if isinstance(svg_path_or_image, Image):
-        ax.imshow(svg_path_or_image)
+        ax.imshow(Image(svg_path_or_image))
     else:
         #Sample 10000 points from the path and get their coordinates
         numberSamplePoints = 10000
