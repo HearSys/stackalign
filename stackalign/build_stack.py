@@ -91,7 +91,7 @@ def print_parameters(T, value=None):
             f" shear={T.shear:.4f} => err={value:.8f}")
 
 
-def plot_overlay(image, svg_path, figsize=(15,15), overlay_color='magenta'):
+def plot_overlay(image, svg_path_or_image, figsize=(15,15), overlay_color='magenta'):
     """
     This function plots a path from an SVG_xml and shows it on top of image.
     - `image`: ndarray
@@ -104,11 +104,14 @@ def plot_overlay(image, svg_path, figsize=(15,15), overlay_color='magenta'):
     ax = fig.add_axes([0,0,1,1])
     #Show transformed image
     ax.imshow(image, interpolation='nearest')
-    #Sample 10000 points from the path and get their coordinates
-    numberSamplePoints = 10000
-    overlay_coords = sp.array([svg_path.point(p/numberSamplePoints) for p in range(numberSamplePoints)])
-    #Plot the path
-    ax.plot(overlay_coords.real, overlay_coords.imag, color=overlay_color)
+    if isinstance(svg_path_or_image, Image):
+        ax.imshow(svg_path_or_image)
+    else:
+        #Sample 10000 points from the path and get their coordinates
+        numberSamplePoints = 10000
+        overlay_coords = sp.array([svg_path.point(p/numberSamplePoints) for p in range(numberSamplePoints)])
+        #Plot the path
+        ax.plot(overlay_coords.real, overlay_coords.imag, color=overlay_color)
     fig.canvas.draw()
     return fig
 
