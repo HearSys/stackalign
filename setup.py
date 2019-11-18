@@ -14,6 +14,7 @@ setup(name='stackalign',
           'scipy',
           'scikit-image',
           'tqdm',
+          'pillow',
           'svg.path',
           'xattr'],
       zip_safe=False)
