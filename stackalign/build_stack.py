@@ -106,11 +106,11 @@ def plot_overlay(image, svg_path_or_image, figsize=(15,15), overlay_color='magen
     #Show transformed image
     ax.imshow(image, interpolation='nearest')
     if isinstance(svg_path_or_image, Image.Image):
-        ax.imshow(Image.open(svg_path_or_image))
+        ax.imshow(svg_path_or_image)
     else:
         #Sample 10000 points from the path and get their coordinates
         numberSamplePoints = 10000
-        overlay_coords = sp.array([svg_path.point(p/numberSamplePoints) for p in range(numberSamplePoints)])
+        overlay_coords = sp.array([svg_path_or_image.point(p/numberSamplePoints) for p in range(numberSamplePoints)])
         #Plot the path
         ax.plot(overlay_coords.real, overlay_coords.imag, color=overlay_color)
     fig.canvas.draw()
