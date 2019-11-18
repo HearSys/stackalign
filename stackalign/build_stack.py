@@ -96,7 +96,7 @@ def plot_overlay(image, svg_path_or_image, figsize=(15,15), overlay_color='magen
     """
     This function plots a path from an SVG_xml and shows it on top of image.
     - `image`: ndarray
-    - `svg_path`: svg path object, see `svg.path`
+    - `svg_path_or_image`: svg path object, see `svg.path`
     - `ax`: Matplotlib axes object
     - `figsize`: size of figure in inch (see Matplotlib)
     """
@@ -119,7 +119,7 @@ def plot_overlay(image, svg_path_or_image, figsize=(15,15), overlay_color='magen
 
 
 def build_stack(images, target, rough_search_strategy=None, fine_search_strategy=None,
-                plot=False, write_files=False, svg_path=None, PF=None):
+                plot=False, write_files=False, svg_path_or_image=None, PF=None):
     """
     - `images`: ndarray or skimage.io.collection.ImageCollection object containing image to be aligned
     - `target`: ndarray containing outline to be searched
@@ -193,7 +193,7 @@ def build_stack(images, target, rough_search_strategy=None, fine_search_strategy
 
             if plot == 'all':
                 im_trans = transform.warp(im, rough_trans, output_shape=[target.shape[0], target.shape[1]])
-                overlay = plot_overlay(im_trans, svg_path)
+                overlay = plot_overlay(im_trans, svg_path_or_image)
                 plt.close(overlay)
 
             trans = rough_trans
@@ -213,7 +213,7 @@ def build_stack(images, target, rough_search_strategy=None, fine_search_strategy
 
             final_transforms.append(trans)
             im_trans = transform.warp(im, trans, output_shape=[target.shape[0], target.shape[1]])
-            overlay = plot_overlay(im_trans, svg_path)
+            overlay = plot_overlay(im_trans, svg_path_or_image)
             if plot:
                 plt.show()
 
