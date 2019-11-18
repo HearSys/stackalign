@@ -105,8 +105,8 @@ def plot_overlay(image, svg_path_or_image, figsize=(15,15), overlay_color='magen
     ax = fig.add_axes([0,0,1,1])
     #Show transformed image
     ax.imshow(image, interpolation='nearest')
-    if isinstance(svg_path_or_image, Image):
-        ax.imshow(Image(svg_path_or_image))
+    if isinstance(svg_path_or_image, Image.Image):
+        ax.imshow(Image.open(svg_path_or_image))
     else:
         #Sample 10000 points from the path and get their coordinates
         numberSamplePoints = 10000
