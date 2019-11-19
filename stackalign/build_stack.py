@@ -65,7 +65,7 @@ def finder_tag_color(path):
         6: 'red',
         7: 'orange',
     }
-    if "darwin" in sys.platform:
+    if not "darwin" in sys.platform:
         return None
 
     attrs = xattr(path)
